@@ -1,8 +1,7 @@
-import React from "react";
-
 const GameKeyboard = () => {
-    return ( <div className="flex flex-col gap-2">
-                <div>
+    return (
+        <div className="flex flex-col items-center gap-2">
+                <div className="keyboard_row">
                     <button className="btn">Q</button>
                     <button className="btn">W</button>
                     <button className="btn">E</button>
@@ -15,7 +14,7 @@ const GameKeyboard = () => {
                     <button className="btn">P</button>
 
                 </div>
-                <div>
+                <div className="keyboard_row">
                     <button className="btn">A</button>
                     <button className="btn">S</button>
                     <button className="btn">D</button>
@@ -26,7 +25,7 @@ const GameKeyboard = () => {
                     <button className="btn">K</button>
                     <button className="btn">L</button>
                 </div>
-                <div>
+                <div className="keyboard_row">
                     <button className="btn">ENTER</button>
                     <button className="btn">Z</button>
                     <button className="btn">X</button>
