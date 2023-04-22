@@ -1,8 +1,14 @@
 import React from 'react'
+import GameKeyboard from "../../components/GameKeyboard.tsx";
+
+
 
 const Home = () => {
   return (
-    <div>Home</div>
+      <div>
+        <div>Board</div>
+        <GameKeyboard/>
+      </div>
   )
 }
 
