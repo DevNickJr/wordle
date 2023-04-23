@@ -63,7 +63,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-4 pt-8">
       <h1 className="mb-4 text-3xl font-extrabold">Wordle</h1>
-      <GameBoxes words={words} word={word} />
+      <GameBoxes words={words} word={word} triedletters={triedletters} />
       <GameKeyboard
           wrongLetters={triedletters.wrongLetters.join("")}
           almostCorrectLetters={triedletters.semiCorrectLetters.join('')}

@@ -3,11 +3,16 @@ import {answer} from "../../constants";
 
 interface GameBoxesProps {
   words: string[];
-  word: number
+  word: number,
+  triedletters: {
+    wrongLetters: string[];
+    semiCorrectLetters: string[];
+    correctLetters: string[];
+}
 }
 
-const GameBoxes: React.FC<GameBoxesProps> = ({ words, word }) => {
-//   console.log(words);
+const GameBoxes: React.FC<GameBoxesProps> = ({ words, word, triedletters }) => {
+  console.log(triedletters);
 
   return (
     <div className="flex flex-col gap-1">
@@ -20,10 +25,8 @@ const GameBoxes: React.FC<GameBoxesProps> = ({ words, word }) => {
                 key={num}
                 className={`flex h-14 w-14 items-center justify-center border-2 border-black/20 text-3xl font-bold ${
                   wordArr[num] && "border-black/40"
-                } ${(word > index) && "bg-[#787c7e] text-white border-none"} ${
-                    ((word > index) && answer.includes(wordArr[num])) && "bg-[#c9b458] text-white"
                 } ${
-                    ((word > index) && answer[num]===wordArr[num]) && "bg-green-400 text-white"
+                    (triedletters?.correctLetters[num]===wordArr[num]) ? "bg-[#538d4e] text-white" : triedletters?.semiCorrectLetters?.includes(wordArr[num]) ? "bg-[#c9b458] text-white" : triedletters?.wrongLetters?.includes(wordArr[num]) ? "bg-[#787c7e] text-white border-none" : ""
                 } capitalize`}
               >
                 {wordArr[num] ?? ""}
