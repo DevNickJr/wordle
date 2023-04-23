@@ -1,11 +1,24 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, {useState, useEffect, useReducer} from "react";
 import GameKeyboard from "../../components/GameKeyboard.tsx";
 import GameBoxes from "../../components/GameBoxes.tsx";
-import { keys } from "../../../constants/index.ts";
+import {answer, keys} from "../../../constants/index.ts";
 
 const Home = () => {
   const [words, setWords] = useState<string[]>([]);
   const [word, setWord] = useState<number>(0);
+
+    const [triedletters, updateTriedLetters] = useReducer((prevState, newValue: string) => {
+
+        return {
+            wrongLetters: newValue.split("").filter(letter => !answer.includes(letter)),
+            semiCorrectLetters: newValue.split("").filter(letter => answer.includes(letter)),
+            correctLetters: newValue.split("").map((letter, index) => answer[index] === letter ? letter : "")
+        }
+    }, {
+        wrongLetters: [],
+        semiCorrectLetters: [],
+        correctLetters: []
+    })
 
   const handleDelete = () => {
     const newWords = [...words];
@@ -24,6 +37,7 @@ const Home = () => {
 
   const handleSubmit = () => {
     if (words[word]?.length >= 5 && word < 6) {
+        updateTriedLetters(words[word])
       setWord(prev => ++prev)
     }
   };
@@ -51,6 +65,9 @@ const Home = () => {
       <h1 className="mb-4 text-3xl font-extrabold">Wordle</h1>
       <GameBoxes words={words} word={word} />
       <GameKeyboard
+          wrongLetters={triedletters.wrongLetters.join("")}
+          almostCorrectLetters={triedletters.semiCorrectLetters.join('')}
+          correctLetters={triedletters.correctLetters.join("")}
         handleSubmit={handleSubmit}
         handleInput={handleInput}
         handleDelete={handleDelete}

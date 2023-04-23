@@ -1,4 +1,5 @@
 import React from "react";
+import {answer} from "../../constants";
 
 interface GameBoxesProps {
   words: string[];
@@ -7,7 +8,7 @@ interface GameBoxesProps {
 
 const GameBoxes: React.FC<GameBoxesProps> = ({ words, word }) => {
 //   console.log(words);
-const answer = "BLOKE"
+
   return (
     <div className="flex flex-col gap-1">
       {(words.slice(0,6) ?? words)?.map((wordStr, index) => {

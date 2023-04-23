@@ -20,10 +20,10 @@ const GameKeyboard = ({
   const keyColor = (key: string) => {
     if (wrongLetters.toUpperCase().includes(key)) {
       return "bg-[#3a3a3c]";
-    } else if (almostCorrectLetters.toUpperCase().includes(key)) {
-      return "bg-[#b59f3b]";
     } else if (correctLetters.toUpperCase().includes(key)) {
       return "bg-[#538d4e]";
+    } else if (almostCorrectLetters.toUpperCase().includes(key)) {
+      return "bg-[#b59f3b]";
     } else {
       return "bg-[#818384]";
     }
