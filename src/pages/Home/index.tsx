@@ -23,7 +23,7 @@ const Home = () => {
 
 
   const handleSubmit = () => {
-    if (words[word]?.length >= 5 && word < 5) {
+    if (words[word]?.length >= 5 && word < 6) {
       setWord(prev => ++prev)
     }
   }
@@ -31,7 +31,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-4 pt-8">
       <h1 className="mb-4 text-3xl font-extrabold">Wordle</h1>
-      <GameBoxes words={words} />
+      <GameBoxes words={words} word={word} />
       <GameKeyboard handleSubmit={handleSubmit} handleInput={handleInput} handleDelete={handleDelete} />
     </div>
   );
