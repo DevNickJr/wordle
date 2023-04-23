@@ -1,7 +1,7 @@
 import React from "react";
 
 interface GameBoxesProps {
-    word: string,
+    word: number,
     words: string[]
 }
 

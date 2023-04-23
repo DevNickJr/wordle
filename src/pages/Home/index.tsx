@@ -4,7 +4,7 @@ import GameBoxes from "../../components/GameBoxes.tsx";
 
 const Home = () => {
   const [words, setWords] = useState<string[]>(["HOUSE", "Rosek", "jnj"]);
-  const [word, setWord] = useState<number>(0);
+  const [word, setWord] = useState<number>(2);
 
   const handleDelete = () => {
     const newWords = [...words];
@@ -13,11 +13,19 @@ const Home = () => {
     setWords(newWords);
   };
 
+
+  const handleInput = (key: string) => {
+    const newWords = [...words]
+    if (newWords[word].length >= 5) return;
+    newWords[word] = newWords[word] + key
+    setWords(newWords)
+  }
+
   return (
     <div className="flex flex-col items-center justify-center gap-4 pt-8">
       <h1 className="mb-4 text-3xl font-extrabold">Wordle</h1>
       <GameBoxes word={word} words={words} />
-      <GameKeyboard handleDelete={handleDelete} />
+      <GameKeyboard handleInput={handleInput} handleDelete={handleDelete} />
     </div>
   );
 };
