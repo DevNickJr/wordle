@@ -1,39 +1,41 @@
 import React from "react";
 import clsx from "clsx";
-import {answer, gameColors} from "../../constants";
+import { answer, gameColors } from "../../constants";
 
 interface GameBoxesProps {
   words: string[];
-  word: number
+  word: number;
+  triedletters: {
+    wrongLetters: string[];
+    semiCorrectLetters: string[];
+    correctLetters: string[];
+  };
 }
 
-const GameBoxes: React.FC<GameBoxesProps> = ({ words, word }) => {
-//   console.log(words);
+const GameBoxes: React.FC<GameBoxesProps> = ({ words, word, triedletters }) => {
+  console.log(triedletters);
 
   return (
     <div className="flex flex-col gap-1">
-      {(words.slice(0,6) ?? words)?.map((wordStr, index) => {
+      {(words.slice(0, 6) ?? words)?.map((wordStr, index) => {
         const wordArr = wordStr?.split("");
         return (
           <div key={wordStr} className={`flex gap-1`}>
             {[0, 1, 2, 3, 4].map((num) => (
               <div
-              key={num}
-              className={clsx(
-                "flex h-14 w-14 items-center justify-center border-2 border-black/20 text-3xl font-bold capitalize", 
-                  wordArr[num] && "border-black/40"
-                , word > index && `border-none bg-[${gameColors.wrong}] text-white`, 
-                word > index &&
-                  answer[num] === wordArr[num] ?
-                  `bg-[${gameColors.correct}] text-white` :
+                key={num}
+                className={clsx(
+                  "flex h-14 w-14 items-center justify-center border-2 border-black/20 text-3xl font-bold capitalize",
+                  wordArr[num] && "border-black/40",
                   word > index &&
-                  answer.includes(wordArr[num]) &&
-                  `bg-[${gameColors.almost}] text-white`,
-           
-                  
-                
-              )}
-              > 
+                    `border-none bg-[${gameColors.wrong}] text-white`,
+                  word > index && answer[num] === wordArr[num]
+                    ? `bg-[${gameColors.correct}] text-white`
+                    : word > index &&
+                        answer.includes(wordArr[num]) &&
+                        `bg-[${gameColors.almost}] text-white`,
+                )}
+              >
                 {wordArr[num] ?? ""}
               </div>
             ))}
@@ -60,8 +62,8 @@ const GameBoxes: React.FC<GameBoxesProps> = ({ words, word }) => {
 
 export default GameBoxes;
 
-
-{/* <div
+{
+  /* <div
 key={num}
 className={clsx(
   "flex h-14 w-14 items-center justify-center border-2 border-black/20 text-3xl font-bold capitalize", 
@@ -76,4 +78,5 @@ className={clsx(
     "bg- text-white"
   } capitalize`
 )}
-> */}
+> */
+}
