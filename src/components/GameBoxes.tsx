@@ -1,5 +1,6 @@
 import React from "react";
-import {answer} from "../../constants";
+import clsx from "clsx";
+import {answer, gameColors} from "../../constants";
 
 interface GameBoxesProps {
   words: string[];
@@ -17,15 +18,22 @@ const GameBoxes: React.FC<GameBoxesProps> = ({ words, word }) => {
           <div key={wordStr} className={`flex gap-1`}>
             {[0, 1, 2, 3, 4].map((num) => (
               <div
-                key={num}
-                className={`flex h-14 w-14 items-center justify-center border-2 border-black/20 text-3xl font-bold ${
+              key={num}
+              className={clsx(
+                "flex h-14 w-14 items-center justify-center border-2 border-black/20 text-3xl font-bold capitalize", 
                   wordArr[num] && "border-black/40"
-                } ${(word > index) && "bg-[#787c7e] text-white border-none"} ${
-                    ((word > index) && answer.includes(wordArr[num])) && "bg-[#c9b458] text-white"
-                } ${
-                    ((word > index) && answer[num]===wordArr[num]) && "bg-green-400 text-white"
-                } capitalize`}
-              >
+                , word > index && `border-none bg-[${gameColors.wrong}] text-white`, 
+                word > index &&
+                  answer[num] === wordArr[num] ?
+                  `bg-[${gameColors.correct}] text-white` :
+                  word > index &&
+                  answer.includes(wordArr[num]) &&
+                  `bg-[${gameColors.almost}] text-white`,
+           
+                  
+                
+              )}
+              > 
                 {wordArr[num] ?? ""}
               </div>
             ))}
@@ -51,3 +59,21 @@ const GameBoxes: React.FC<GameBoxesProps> = ({ words, word }) => {
 };
 
 export default GameBoxes;
+
+
+{/* <div
+key={num}
+className={clsx(
+  "flex h-14 w-14 items-center justify-center border-2 border-black/20 text-3xl font-bold capitalize", 
+    wordArr[num] && "border-black/40"
+  , ` ${word > index && "border-none bg-[#787c7e] text-white"} ${
+    word > index &&
+    answer.includes(wordArr[num]) &&
+    "bg-[#c9b458] text-white"
+  } ${
+    word > index &&
+    answer[num] === wordArr[num] &&
+    "bg- text-white"
+  } capitalize`
+)}
+> */}

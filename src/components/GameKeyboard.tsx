@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import clsx from "clsx";
-import { keys } from "./../../constants/index";
+import { gameColors, keys } from "./../../constants";
 
 const GameKeyboard = ({
   handleInput = (key) => {},
@@ -19,11 +19,11 @@ const GameKeyboard = ({
 }) => {
   const keyColor = (key: string) => {
     if (wrongLetters.toUpperCase().includes(key)) {
-      return "bg-[#3a3a3c]";
+      return `bg-[${gameColors.wrong}]`;
     } else if (correctLetters.toUpperCase().includes(key)) {
-      return "bg-[#538d4e]";
+      return `bg-[${gameColors.correct}]`;
     } else if (almostCorrectLetters.toUpperCase().includes(key)) {
-      return "bg-[#b59f3b]";
+      return `bg-[${gameColors.almost}]`;
     } else {
       return "bg-[#818384]";
     }
