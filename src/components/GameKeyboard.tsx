@@ -3,11 +3,15 @@ import clsx from "clsx";
 
 const GameKeyboard = ({
   handleClick = (key) => {},
+  handleDelete = () => {},
+  handleSubmit = () => {},
   correctLetters = "",
   wrongLetters = "",
   almostCorrectLetters = "",
 }: {
   handleClick: (key: string) => void;
+  handleDelete: () => void;
+  handleSubmit: () => void;
   correctLetters: string;
   wrongLetters: string;
   almostCorrectLetters: string;
@@ -30,7 +34,7 @@ const GameKeyboard = ({
         {React.Children.toArray(
           keys.slice(0, 10).map((key) => (
             <button
-              onClick={() => handleClick(key)}
+              onClick={() => handleClick(key.toUpperCase())}
               className={clsx("btn text-lg text-white", keyColor(key))}
             >
               {key}
@@ -51,7 +55,9 @@ const GameKeyboard = ({
         )}
       </div>
       <div className="keyboard_row">
-        <button className="btn text-sm">ENTER</button>
+        <button onClick={handleSubmit} className="btn text-sm">
+          ENTER
+        </button>
         {React.Children.toArray(
           keys.slice(19, 26).map((key) => (
             <button
@@ -62,7 +68,9 @@ const GameKeyboard = ({
             </button>
           )),
         )}
-        <button className={clsx("btn text-lg")}>DEL</button>
+        <button onClick={handleDelete} className={clsx("btn text-lg")}>
+          DEL
+        </button>
       </div>
     </div>
   );
