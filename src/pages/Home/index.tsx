@@ -10,9 +10,9 @@ const Home = () => {
     const [triedletters, updateTriedLetters] = useReducer((prevState, newValue: string) => {
 
         return {
-            wrongLetters: newValue.split("").filter(letter => !answer.includes(letter)),
-            semiCorrectLetters: newValue.split("").filter(letter => answer.includes(letter)),
-            correctLetters: newValue.split("").map((letter, index) => answer[index] === letter ? letter : "")
+            wrongLetters: prevState.wrongLetters.concat(newValue.split("").filter(letter => !answer.includes(letter))),
+            semiCorrectLetters: prevState.semiCorrectLetters.concat(newValue.split("").filter(letter => answer.includes(letter))),
+            correctLetters: newValue.split("").map((letter, index) => answer[index] === letter ? letter : prevState?.correctLetters[index] ?? "")
         }
     }, {
         wrongLetters: [],
