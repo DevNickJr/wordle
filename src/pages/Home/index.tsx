@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-4 pt-8">
       <h1 className="mb-4 text-3xl font-extrabold">Wordle</h1>
-      <GameBoxes word={word} words={words} />
+      <GameBoxes words={words} />
       <GameKeyboard handleDelete={handleDelete} />
     </div>
   );
