@@ -5,11 +5,11 @@ interface GameBoxesProps {
 }
 
 const GameBoxes: React.FC<GameBoxesProps> = ({ words }) => {
-  console.log(words);
+//   console.log(words);
   return (
     <div className="flex flex-col gap-1">
       {words?.map((word) => {
-        const wordArr = word.split("");
+        const wordArr = word?.split("") ;
         return (
           <div key={word} className={`flex gap-1`}>
             {[0, 1, 2, 3, 4].map((num) => (
@@ -21,13 +21,13 @@ const GameBoxes: React.FC<GameBoxesProps> = ({ words }) => {
                   false && "bg-[#c9b458] text-white"
                 } capitalize`}
               >
-                {wordArr[num]}
+                {wordArr[num] ?? ""}
               </div>
             ))}
           </div>
         );
       })}
-      {[...Array(6 - words.length)]?.map((val) => (
+      {[...Array(6 - words?.length)]?.map((val) => (
         <div key={val} className={`flex gap-1`}>
           {[0, 1, 2, 3, 4].map((num) => (
             <div
