@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import clsx from "clsx";
+import { keys } from "./../../constants/index";
 
 const GameKeyboard = ({
   handleInput = (key) => {},
@@ -27,7 +28,7 @@ const GameKeyboard = ({
       return "bg-[#818384]";
     }
   };
-  const keys = "QWERTYUIOPASDFGHJKLZXCVBNM".split("");
+
   return (
     <div className="flex flex-col items-center gap-2">
       <div className="keyboard_row">

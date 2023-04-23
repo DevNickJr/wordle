@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import GameKeyboard from "../../components/GameKeyboard.tsx";
 import GameBoxes from "../../components/GameBoxes.tsx";
+import { keys } from "../../../constants/index.ts";
 
 const Home = () => {
   const [words, setWords] = useState<string[]>([]);
@@ -13,26 +14,47 @@ const Home = () => {
     setWords(newWords);
   };
 
-
   const handleInput = (key: string) => {
-    const newWords = [...words]
+    console.log({ key });
+    const newWords = [...words];
     if (newWords[word]?.length >= 5) return;
-    newWords[word] = (newWords[word] ?? "") + key
-    setWords(newWords)
-  }
-
+    newWords[word] = (newWords[word] ?? "") + key;
+    setWords(newWords);
+  };
 
   const handleSubmit = () => {
     if (words[word]?.length >= 5 && word < 6) {
       setWord(prev => ++prev)
     }
-  }
+  };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+      console.log("Key pressed:", event.keyCode);
+      if (event.keyCode === 8) {
+        handleDelete()
+      } else if (event.keyCode === 13) {
+        handleSubmit()
+      } else if (keys.includes(event.key.toUpperCase())) {
+        handleInput(event.key.toUpperCase())
+      }
+    }
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [words, word]);
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 pt-8">
       <h1 className="mb-4 text-3xl font-extrabold">Wordle</h1>
       <GameBoxes words={words} word={word} />
-      <GameKeyboard handleSubmit={handleSubmit} handleInput={handleInput} handleDelete={handleDelete} />
+      <GameKeyboard
+        handleSubmit={handleSubmit}
+        handleInput={handleInput}
+        handleDelete={handleDelete}
+      />
     </div>
   );
 };
